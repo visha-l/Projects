@@ -1,0 +1,212 @@
+<html>
+<head>
+<?php include '../common/meta.html';?>
+<link rel="stylesheet" href="../list-template/assets/css/article-lists/article-list-vertical.css">
+<link rel="stylesheet" href="../USER/cart.css">
+<style>
+.background {
+    background:url('../img/bg/diagonalnoise.png');
+    position: relative;
+}
+
+.layer {
+    background-color: rgba(248, 247, 216, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.alg{
+	width:600px;
+	text-align:right;
+	margin:auto;
+	margin-top:10px;
+}
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: black;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 0px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 0px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.foot1{
+	margin-left : 180px;
+	margin-top:33%;
+	
+	}
+.footer-distributed {
+	background-color:navy;
+}
+.img-circle {
+	border-radius : 50%
+}
+
+.btnlogin{
+margin-left:80%;
+}
+.blank {
+	padding-top:100px;
+	padding-left:180px;
+	background-color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+
+
+<?php
+include '../common/sidebar.php';
+
+session_start();
+
+
+	if(isset($_SESSION['u_id']) && !empty($_SESSION['u_id']))
+	{
+		$flag=true;
+	}
+	else
+	{
+		echo "not logged in ";
+
+		$flag=false;
+	}
+
+if($flag==true)
+{
+	$php_uid=$_SESSION['u_id'];
+	
+	$servername = "localhost";
+	$username  = "root";
+	$password = "";
+	$dbname = "DBMS_PROJECT";
+
+	$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+
+
+		if($conn->connect_error)
+		{
+			die("Connection failed: ".$conn->connect_error);
+		}
+
+
+
+
+ 							$sql="select BOOKTITLE, QUANTITY,BOOKID,qty as cnt from BOOK natural join cart where u_id='$php_uid' ";
+									$res=$conn->query($sql);
+									if($res==true)
+									{			
+									
+													echo '<div class="wrapper" style="float:left;margin-left:20%;">
+  
+											  <div class="table">
+		
+												<div class="row header">
+												  <div class="cell">
+													Book Title
+												  </div>
+												  <div class="cell">
+													Quantity
+												  </div>
+												  <div class="cell">
+													Remove Quantity
+												  </div>
+												  <div class="cell">
+													  Remove 
+												  </div>
+												</div>';
+									
+												/*	echo "<div style='padding-right:10px;'>";
+													echo "<h2 style='margin-left:70%'>YOUR CART</h2>";
+													echo "<table border='4' bordercolor='navy' style='margin-left:70%;'>";
+													echo "<th>Book Title</th><th>Quantity</th><th COLSPAN='20'>REMOVE ITEMS</th>";*/
+													$row=$res->fetch_assoc();
+													while($row)
+													{
+													 echo ' <div class="row">
+													 			<form action="../USER/remove.php" method="POST">
+															  <div class="cell">
+																<input  type="hidden" name="book"  value='.$row['BOOKID'].'> '.$row["BOOKTITLE"].'
+															  </div>
+															  <div class="cell">
+																'.$row["cnt"].'
+															  </div>
+															  <div class="cell">
+																<input   name= "quantity"    id="book_quantity" type="number" min="0" max='.$row['cnt'].' placeholder="type"  >
+															  </div>
+															  <div class="cell">
+																<input type="hidden"  name="u_id"  value='.$php_uid.'> 
+										<a href="../USER/userlogin.php"> <button class="button" style="vertical-align:middle"><span>remove</span></button></a>
+															  </div>
+															  </form>
+															</div>';
+
+													$row=$res->fetch_assoc();														
+													}
+												
+											echo '</div></div>';	
+									}
+									else
+									{
+										echo "<script>query not run successfully";
+										echo "query not run successfully".$conn->error;
+									}
+
+					
+									echo '<div style="padding-left:80%;padding-top:5%">			
+									<a href="../USER/pur.php"> <button class="button" style="vertical-align:middle;background-color:orange; font-size:28px;"><span>Buy</span></button></a>
+							
+									</div>';
+$conn->close();
+}
+else
+{
+	echo "<a href='../USER/userlogin.php'> <button class='button' style='vertical-align:middle'><span>LOGIN</span>   </button> </a>";
+}
+?>
+<section class="foot1">
+<?php include '../common/footer.php' ;?>
+</section>
+ <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+</body>
+</html>
+
+

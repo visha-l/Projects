@@ -1,0 +1,102 @@
+<?php 
+
+session_start();
+
+
+if(isset($_SESSION["u_id"]) && !empty($_SESSION["u_id"]))
+{
+	$flag=1;
+}
+else
+{
+	$flag=0;
+}
+
+if($flag=1)
+{
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+
+$dbname = "DBMS_PROJECT";
+$conn = new mysqli($servername, $username, $password,$dbname);
+
+if ($conn->connect_error) {
+   die("Connection failed: " . $conn->connect_error);
+	} 
+
+
+
+/*$query_file = 'sql_squery.txt';
+   
+   $fp = fopen($query_file, 'r');
+   $sql = fread($fp, filesize($query_file));
+   fclose($fp); 
+*/
+
+/*if ($conn->query($sql) === TRUE) {
+    echo "Tables  created successfully";
+} else {
+    echo "Error creating tablesa: " . $conn->error;
+}*/
+
+
+$php_uname=$_POST['u_name'];
+$php_pwd=$_POST['u_pwd'];
+$php_email=$_POST['u_email'];
+
+
+$php_id=$_SESSION['U_ID'];
+
+$sql = "UPDATE u_signup  SET  u_name= '$php_uname' , u_pwd='$php_pwd' , u_email='$php_email' WHERE   u_id ='$php_id' " ;
+
+
+
+if ($conn->query($sql) == TRUE)
+{
+  echo " record updated successfully";
+	header('Location:../USER/uaccount.php');
+/*$sql = "SELECT * FROM U_SIGNUP" ;
+
+$result=$conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "supplier_id: " . $row["u_id"]. " - Name: " . $row["u_name"]. "password " . $row["u_pwd"]. " email" . $row["u_email"]."<br>" ;
+    }
+} else {
+    echo "0 results";
+}*/
+}
+else 
+{
+    echo "Errorss: " . $sql . "<br>" . $conn->error;
+}
+
+}	
+else
+{
+	header('Location:../USER/userlogin.php');
+}
+
+/*
+$sql = "SELECT * FROM s_signup";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "supplier_id: " . $row["s_id"]. " - Name: " . $row["s_name"]. "password " . $row["s_pwd"]. " email" . $row["s_email"].  "contact " . $row["contact"]. "<br>" ;
+    }
+} else {
+    echo "0 results";
+}
+*/
+
+
+
+$conn->close();
+
+ ?> 

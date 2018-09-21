@@ -1,0 +1,22 @@
+
+      <form action="u_signup.php" method="POST">
+      
+        <h1>Sign Up</h1>
+        
+        <fieldset>
+          <legend><span class="number">1</span>Your basic info</legend>
+          <label for="name">User ID:</label>
+          <input type="text" id="name" name="u_id" required>
+          
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="u_name"pattern="[a-zA-Z\s]{4,20}"  title="Enter name properly" required>
+          
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="u_pwd"  maxlength=30 required>
+          
+          <label for="mail">Email:</label>
+          <input type="email" id="mail" name="u_email" pattern="[a-zA-Z0-9]{1,20}@[a-zA-Z]{3,20}.[a-zA-Z]{1,20}"  title="Enter Correct Email" required>
+          
+        </fieldset>
+        <button type="submit">Sign Up</button>
+      </form>

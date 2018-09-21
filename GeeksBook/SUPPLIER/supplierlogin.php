@@ -1,0 +1,123 @@
+<html>
+<head>
+
+<?php include '../common/meta.html'; ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="../flat-login-form/css/style.css">
+
+<style>
+
+.foot1{
+	margin-left : 180px;
+	margin-top: 200px;
+	
+	}
+.footer-distributed {
+	background-color:blue;
+}
+.flogin{
+	margin-left:100px;
+}
+.img-circle {
+	border-radius : 50%
+}
+
+.clr{
+	color:#000;
+}
+
+</style>
+</head>
+<body >
+<?php
+	session_start();
+	//if($_SERVER["HTTP_REFERER"])
+	/*echo '<div style="margin-left:400px;">';
+	echo $_SERVER["HTTP_REFERER"];
+	echo '</div>';*/
+	
+	if(isset($_SESSION["sloginflag"]))
+	{
+		$varl=$_SESSION["supplierloginflag"];
+		if($varl==2)
+		{	
+			echo "<script>alert('Wrong Password');</script>";
+		}
+		else if($varl==3)
+		{
+			echo "<script>alert('Wrong Username');</script>";
+		}
+		//this unset session variable
+		
+		unset($_SESSION["sloginflag"]);
+	}
+	
+	
+?>
+<?php include '../common/sidebar.php'; ?>
+
+<div class="flogin">
+<?php include '../SUPPLIER/slogin-form.php'; ?>
+</div>
+
+<section class="foot1">
+<?php include '../common/footer.php' ;?>
+</section>
+<!--<div id="nav"><br>
+<div id="nav_wrapper">
+ <ul>
+	<li><a href="http://localhost/home.php">Home</button></a></li>
+	<li><a href="http://localhost/suppliersignup.php">Supplier</a></li>
+	<li><a href="http://localhost/supplierlogin.php">S-login</a></li>
+	<li><a href="http://localhost/usersignup.php">Customer</a></li>
+	<li><a href="http://localhost/userlogin.php">C-login</a></li>
+  </ul>
+</div>	
+</div>
+<?php
+	$iderr = $pwderr = "";
+	$s_id = $s_pwd ="";
+	
+	if($_SERVER["REQUEST_METHOD"] == "POST")
+	{
+		if(empty($_POST["s_id"]))
+		{
+			$iderr = "Supplier ID is required";
+		}
+		else
+		{
+			$s_id = test_input($_POST["s_id"]);
+		}
+		if(empty($_POST["s_pwd"]))
+		{
+			$pwderr = "Supplier Password is required";
+		}
+		else
+		{
+			$s_pwd = test_input($_POST["s_pwd"]);
+		}
+		
+	}
+  function test_input($data)
+  {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  	return $data;
+  }
+
+?>
+
+	<form action="redirect.php" method="GET">
+	  <fieldset>
+	   <legend align="center">Supplier-Login</legend>
+		Supplier ID<br>
+		<input type="text" name="s_id">
+		<br>Supplier Password<br>
+		<input type="password" name="s_pwd"><br>
+		<pre><input type="submit">  <input type="reset"></pre>
+	   </fieldset>	
+	</form>	-->
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<aside class="sidebar-left-collapse">
+
+		<a href="#" class="company-logo"><img class="img-circle" src="../jpgfiles/book3.jpg"width="120px" height="120px"/></a>
+
+		<div class="sidebar-links">
+
+			<div class="link-blue selected">
+
+				<a href="../HOME/home.php">
+					<i class="fa fa-home"></i>HOME
+				</a>
+
+			</div>
+
+			<div class="link-red">
+
+				<a href="../HOME/about.php">
+					<i class="fa fa-user"></i>About
+				</a>
+			</div>
+
+			<div class="link-yellow">
+
+				<a href="../HOME/contact.php">
+					<i class="fa fa-phone"></i>Contact
+				</a>
+
+			</div>
+
+			<div class="link-green">
+
+			<a href="#">
+				<i class="fa fa-map-marker"></i>Places
+			</a>
+			</div>
+
+		</div>
+
+	</aside>
+

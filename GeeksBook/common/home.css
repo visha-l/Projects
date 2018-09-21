@@ -1,0 +1,59 @@
+.photo {
+    width: 250px;
+    height:  250px;
+    margin: auto;
+    float: left;
+    cursor: pointer;
+    -webkit-box-shadow: 5px 5px 5px #777;
+    box-shadow: 5px 5px 5px #777;   
+    transition: all .5s ease-in-out;
+    overflow: hidden;
+    border :#00008B 2px solid;
+    
+}
+.grow {
+  padding: 10%;
+}
+.grow img {
+    width: 100%;
+    height: 150px;
+    opacity: 0.7;
+    transition: all 0.5s ease-in-out;
+    vertical-align: bottom;
+}
+.grow img:hover {
+    -webkit-transform: scale(1.17);
+    transform: scale(1.17);
+    opacity: 1;
+}
+.alg{
+	width:75%;
+	text-align:center;
+	margin:auto;
+	padding-left:150px;
+	margin-top:75px;
+	background-color:white;
+}
+img {
+	margin:5px;
+}
+.write {
+	color: red;
+	font-family:verdana;
+	text-align : center;
+	padding-bottom: 0em;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 0px;
+}
+.clearfix:after {
+    content: "";
+
+    clear: both;
+}
+

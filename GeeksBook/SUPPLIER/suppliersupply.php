@@ -1,0 +1,113 @@
+<html>
+<head>
+<link rel="stylesheet" href="../sign-up/css/style.css">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+-->
+<?php include '../common/meta.html';?>
+
+</head>
+
+<style>
+.alg{
+	width:600px;
+	text-align:right;
+	margin:auto;
+	margin-top:10px;
+}
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: black;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: none;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.foot1{
+	margin-left : 180px;
+	margin-top	: 100px;
+	
+	}
+.footer-distributed {
+	background-color:navy;
+}
+.img-circle {
+	border-radius : 50%
+}
+.btnlogin{
+margin-left:none;
+}
+.blank {
+	padding-top:100px;
+	padding-left:180px;
+	background-color:white;
+}
+</style>
+<body>
+<?php 
+        session_start();
+		if(isset($_SESSION['S_ID']) && !empty($_SESSION['S_ID']) ){ $flag=1; }
+		else{ $flag=0;}
+		
+include '../common/sidebar.php';
+if($flag==1)		
+{
+	include '../SUPPLIER/supply-form.php';
+	
+	echo '<section class="foot1">	';
+	include '../common/footer.php';
+	echo '</section>';
+}
+else
+{
+	echo '<div class="blank"></div>
+		  <div style="padding-top:10px;background-color:black;margin-left:350px;width:50%;font-family:cursive;font-size:30px;color:white;">you are not logged in.......</div>
+		  <a href="../SUPPLIER/supplierlogin.php">
+		 <button class="button btnlogin" style="vertical-align:middle;float:right;">
+		 
+		 <span style="color:white;">LOGIN PLEASE</span> 
+		 </button></a>';
+	 
+	echo'<section style="margin-left:180px;margin-top:320px;">';	
+	include '../common/footer.php';	
+	echo '</section>';
+}
+?>
+
+
+</body>
+</html>
+
+
